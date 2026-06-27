@@ -1,0 +1,33 @@
+.vercel
+
+# OpenClaw: ignore all runtime state; whitelist ship-verification paths only (no secrets).
+.openclaw/**
+.openclaw-dev/**
+!.openclaw/
+!.openclaw/workspace/
+!.openclaw/workspace/memory/
+!.openclaw/workspace/memory/ship-log.md
+!.openclaw/workspace/projects/
+!.openclaw/workspace/projects/grok-businesses/
+!.openclaw/workspace/projects/grok-businesses/ai-printables-planners/
+!.openclaw/workspace/projects/grok-businesses/ai-printables-planners/tests/
+!.openclaw/workspace/projects/grok-businesses/ai-printables-planners/tests/test_generate_ship.py
+!.openclaw/workspace/projects/grok-businesses/DISTRIBUTION/
+!.openclaw/workspace/projects/grok-businesses/DISTRIBUTION/printables/
+!.openclaw/workspace/projects/grok-businesses/DISTRIBUTION/printables/ship_x.py
+!.openclaw/workspace/projects/grok-businesses/DISTRIBUTION/printables/verify_x_receipt.py
+!.openclaw/workspace/projects/grok-businesses/DISTRIBUTION/printables/check_ship_delta.sh
+
+# xurl CLI config — credentials live in env/keychain, not this file
+.xurl
+
+# Cloudflared tunnel credentials
+.cloudflared/
+
+# Twilio CLI local state
+.twilio-cli/
+.config/secrets/
+node_modules
+
+# Python virtual environments
+venv/
