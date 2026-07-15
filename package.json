@@ -1,0 +1,14 @@
+{
+  "name": "interop-2026-pattern-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Living Pattern Lab for 2026 web UI — Interop-safe responsive patterns, accessible color, progressive motion, zero-JS alternatives.",
+  "scripts": {
+    "dev": "npx --yes serve public -l 3456",
+    "start": "npx --yes serve public -l 3456",
+    "build": "mkdir -p dist && cp -R public/* dist/"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

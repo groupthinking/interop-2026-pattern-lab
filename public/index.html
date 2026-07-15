@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Living Pattern Lab for 2026 web UI — Interop-safe responsive patterns, accessible color, progressive motion, and zero-JS alternatives." />
+  <meta name="theme-color" content="#12141c" />
+  <title>Interop 2026 · Pattern Lab</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2322d3ee'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' font-family='system-ui'%3E⚗%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="sr-only" href="#live-lab">Skip to live lab</a>
+
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="brand" href="#">
+        <div class="brand__mark" aria-hidden="true">⚗</div>
+        <div>
+          <div class="brand__title">Interop 2026</div>
+          <div class="brand__sub">Pattern Lab</div>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <span class="live-pill" title="Patterns use Baseline + Interop 2026 focus areas with progressive fallbacks">
+          <span class="live-dot" aria-hidden="true"></span>
+          Baseline + Interop 2026
+        </span>
+        <button type="button" class="btn btn--ghost" id="bookmark-btn">
+          <span aria-hidden="true">Bookmark</span>
+          <span class="sr-only">Copy or share lab URL</span>
+        </button>
+        <button type="button" class="btn btn--icon btn--ghost" id="theme-toggle" aria-label="Toggle color theme">
+          <span id="theme-icon" aria-hidden="true">☀</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div class="hero__eyebrow">
+        <span aria-hidden="true">★</span>
+        Built only with features safe enough to ship under Interop 2026
+      </div>
+      <h1 class="hero__title">Living Pattern Lab for 2026 Web UI</h1>
+      <p class="hero__lead">
+        Paste a landing page, app screen, or design-system component.
+        Get it rebuilt with container-aware layout, accessible color logic,
+        motion that degrades cleanly, and zero-JavaScript alternatives where possible.
+      </p>
+      <div class="hero__actions">
+        <button type="button" class="btn btn--primary btn--lg" data-scroll="paste-section">
+          Paste your design
+          <span aria-hidden="true">→</span>
+        </button>
+        <button type="button" class="btn btn--ghost btn--lg" data-scroll="patterns-grid">
+          Explore patterns
+        </button>
+      </div>
+    </section>
+
+    <section class="shell principles" aria-label="Principles">
+      <article class="principle">
+        <div class="principle__icon" aria-hidden="true">📱</div>
+        <h3>Responsive</h3>
+        <p>Container queries, logical properties, and <code>clamp()</code> — layout that follows the component, not fragile breakpoints alone.</p>
+      </article>
+      <article class="principle">
+        <div class="principle__icon" aria-hidden="true">🎨</div>
+        <h3>Accessible color</h3>
+        <p><code>contrast-color()</code> + OKLCH with solid fallbacks. Automatic contrast without dual token tables.</p>
+      </article>
+      <article class="principle">
+        <div class="principle__icon" aria-hidden="true">▶</div>
+        <h3>Motion that yields</h3>
+        <p>CSS transitions and scroll-driven animation, gated by <code>prefers-reduced-motion</code>.</p>
+      </article>
+      <article class="principle">
+        <div class="principle__icon" aria-hidden="true">&lt;/&gt;</div>
+        <h3>Zero-JS first</h3>
+        <p><code>&lt;dialog&gt;</code>, Popover, <code>&lt;details&gt;</code>, anchor positioning — native UI before libraries.</p>
+      </article>
+    </section>
+
+    <section class="shell" id="patterns-grid" aria-labelledby="patterns-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="patterns-heading">Featured safe patterns</h2>
+          <p>Click a card to load it into the live lab</p>
+        </div>
+        <span class="chip">8 production patterns</span>
+      </div>
+      <div class="pattern-grid" id="patterns-grid-cards"></div>
+    </section>
+
+    <section class="shell" id="live-lab" aria-labelledby="lab-heading">
+      <div class="lab">
+        <div class="lab__header">
+          <div>
+            <h2 id="lab-heading">Live pattern lab</h2>
+            <p>Customize → compare side-by-side → copy production code</p>
+          </div>
+          <div class="pattern-badge" id="current-pattern-badge">
+            <span id="current-pattern-name">Select a pattern</span>
+          </div>
+        </div>
+
+        <div class="controls" id="controls-panel" hidden>
+          <div id="controls-container"></div>
+        </div>
+
+        <div class="previews">
+          <div>
+            <div class="preview-panel__label">
+              <span class="badge badge--safe">Interop 2026 safe</span>
+              <span style="font-size:0.75rem;color:var(--text-faint)">Production-oriented</span>
+            </div>
+            <div id="safe-preview" class="preview-frame preview-frame--safe" aria-live="polite">
+              <p class="empty-preview">Select a pattern to preview</p>
+            </div>
+            <p class="preview-panel__hint">Container queries · contrast-color() · logical props · native APIs</p>
+          </div>
+          <div>
+            <div class="preview-panel__label">
+              <span class="badge badge--legacy">Traditional / pre-Interop</span>
+            </div>
+            <div id="original-preview" class="preview-frame preview-frame--legacy">
+              <p class="empty-preview">Comparison loads with the pattern</p>
+            </div>
+            <p class="preview-panel__hint">More JS, viewport media queries, manual contrast</p>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <div class="tablist" role="tablist" aria-label="Code and rationale">
+            <button type="button" class="tab" role="tab" id="tab-html" aria-selected="true" aria-controls="panel-html" tabindex="0">HTML</button>
+            <button type="button" class="tab" role="tab" id="tab-css" aria-selected="false" aria-controls="panel-css" tabindex="-1">CSS</button>
+            <button type="button" class="tab" role="tab" id="tab-react" aria-selected="false" aria-controls="panel-react" tabindex="-1">React</button>
+            <button type="button" class="tab" role="tab" id="tab-rationale" aria-selected="false" aria-controls="panel-rationale" tabindex="-1">Rationale &amp; support</button>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-html" aria-labelledby="tab-html">
+            <div class="code-toolbar">
+              <span>Production HTML</span>
+              <button type="button" class="btn btn--ghost" data-copy="html-code" style="padding:0.3rem 0.65rem;font-size:0.75rem">Copy</button>
+            </div>
+            <pre class="code-block" id="html-code"></pre>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-css" aria-labelledby="tab-css" hidden>
+            <div class="code-toolbar">
+              <span>Production CSS</span>
+              <button type="button" class="btn btn--ghost" data-copy="css-code" style="padding:0.3rem 0.65rem;font-size:0.75rem">Copy</button>
+            </div>
+            <pre class="code-block" id="css-code"></pre>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-react" aria-labelledby="tab-react" hidden>
+            <div class="code-toolbar">
+              <span>React component</span>
+              <button type="button" class="btn btn--ghost" data-copy="react-code" style="padding:0.3rem 0.65rem;font-size:0.75rem">Copy</button>
+            </div>
+            <pre class="code-block" id="react-code"></pre>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-rationale" aria-labelledby="tab-rationale" hidden>
+            <div class="rationale" id="rationale-content"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" id="paste-section" aria-labelledby="copilot-heading">
+      <div class="copilot">
+        <h2 id="copilot-heading">Design-system copilot</h2>
+        <p>
+          Paste HTML, CSS, or a React snippet. The lab flags pre-Interop patterns and suggests Interop-safe rebuilds.
+          Shortcut: <kbd class="mono" style="font-size:0.8em">⌘/Ctrl&nbsp;K</kbd>
+        </p>
+        <label class="sr-only" for="paste-input">Paste code</label>
+        <textarea
+          id="paste-input"
+          class="paste-area"
+          spellcheck="false"
+          placeholder="Paste a landing hero, button, modal, nav, or design-token CSS…"
+        ></textarea>
+        <div class="paste-actions">
+          <button type="button" class="btn btn--primary" id="analyze-btn">Analyze &amp; rebuild</button>
+          <button type="button" class="btn btn--ghost" id="example-btn">Load example</button>
+        </div>
+
+        <div class="paste-results" id="paste-results" hidden>
+          <div class="analysis-box">
+            <h3>Analysis</h3>
+            <div id="analysis-output"></div>
+          </div>
+          <div class="rebuild-box">
+            <div class="code-toolbar">
+              <h3 style="margin:0">Suggested Interop-safe code</h3>
+              <button type="button" class="btn btn--ghost" id="copy-rebuilt" style="padding:0.3rem 0.65rem;font-size:0.75rem">Copy</button>
+            </div>
+            <pre class="code-block" id="rebuilt-code"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell feature-map" aria-labelledby="features-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="features-heading">Interop 2026 UI focus map</h2>
+          <p>Features this lab deliberately uses or documents</p>
+        </div>
+        <a class="chip" href="https://wpt.fyi/interop-2026" target="_blank" rel="noopener noreferrer">Dashboard ↗</a>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-item">
+          <h3>contrast-color()</h3>
+          <p>Auto-contrast text against a color. Always pair with a solid fallback.</p>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value/contrast-color" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>Container style queries</h3>
+          <p>Theme components from custom properties with <code>@container style()</code>.</p>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>CSS anchor positioning</h3>
+          <p>Pin menus and tooltips to triggers without measuring the DOM.</p>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Guides/Anchor_positioning" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>Dialogs &amp; popovers</h3>
+          <p><code>closedby</code>, <code>:open</code>, <code>popover="hint"</code> for native overlays.</p>
+          <a href="https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/dialog" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>Scroll-driven animations</h3>
+          <p><code>animation-timeline: view()</code> — progressive enhancement only.</p>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Guides/Scroll-driven_animations" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>Scroll snap</h3>
+          <p>Reliable carousels without a JS slider dependency.</p>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Guides/Scroll_snap" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>View transitions</h3>
+          <p>Document and same-document transitions — use when navigation UX needs them.</p>
+          <a href="https://developer.mozilla.org/docs/Web/API/View_Transition_API" target="_blank" rel="noopener">MDN</a>
+        </article>
+        <article class="feature-item">
+          <h3>attr() typed values</h3>
+          <p>Read HTML attributes into CSS with typed parsing (advanced theming).</p>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Reference/Values/attr" target="_blank" rel="noopener">MDN</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <p>
+        Interop 2026 Pattern Lab · Features tracked on
+        <a href="https://wpt.fyi/interop-2026" target="_blank" rel="noopener noreferrer">wpt.fyi/interop-2026</a>
+        and documented on
+        <a href="https://web.dev/blog/interop-2026" target="_blank" rel="noopener noreferrer">web.dev</a>.
+        Progressive enhancement: every pattern ships a Baseline fallback path.
+      </p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
