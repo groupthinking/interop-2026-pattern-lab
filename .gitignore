@@ -43,6 +43,9 @@ venv/
 !package.json
 !vercel.json
 !README.md
+!.github/
+!.github/**
+
 
 # Build / deploy noise
 dist/
