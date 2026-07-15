@@ -1,6 +1,7 @@
 # Interop 2026 Pattern Lab
 
-**Live site:** [https://groupthinking.github.io/interop-2026-pattern-lab/](https://groupthinking.github.io/interop-2026-pattern-lab/)
+**Live site (Vercel):** [https://grok-pied-zeta.vercel.app](https://grok-pied-zeta.vercel.app)  
+**Mirror (GitHub Pages):** [https://groupthinking.github.io/interop-2026-pattern-lab/](https://groupthinking.github.io/interop-2026-pattern-lab/)
 
 A **living design-system copilot** for shipping 2026 web UI with features that are safe under **[Interop 2026](https://wpt.fyi/interop-2026)**.
 
