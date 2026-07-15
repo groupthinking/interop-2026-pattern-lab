@@ -1,5 +1,7 @@
 # Interop 2026 Pattern Lab
 
+**Live site:** [https://groupthinking.github.io/interop-2026-pattern-lab/](https://groupthinking.github.io/interop-2026-pattern-lab/)
+
 A **living design-system copilot** for shipping 2026 web UI with features that are safe under **[Interop 2026](https://wpt.fyi/interop-2026)**.
 
 Paste a landing page, app screen, or component → see an Interop-safe rebuild side-by-side with the traditional approach → copy HTML, CSS, and React with browser-support rationale for every decision.
